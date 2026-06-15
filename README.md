@@ -61,9 +61,9 @@ Then open the runnable dashboard:
 http://localhost:6015/?darkMode=true#timeseries
 ```
 
-The sample index is here:
+The sample dashboard is here:
 
-[samples/demo/dashboard.html]([samples/demo/dashboard.html](https://architsriva.github.io/arcgis-tensorboard-keeper/samples/demo/dashboard.html))
+[Open the sample dashboard](https://architsriva.github.io/arcgis-tensorboard-keeper/samples/demo/dashboard.html)
 
 ## Requirements
 
