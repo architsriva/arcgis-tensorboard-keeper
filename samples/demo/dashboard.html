@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TensorBoard Archive Dashboard</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #52606d;
+      --line: #cbd5e1;
+      --head: #d9eaf7;
+      --code: #111827;
+      --accent: #f57c00;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: calc(100% - 1in);
+      margin: 0 auto;
+      padding: 28px 0 42px;
+    }
+    @media (max-width: 720px) {
+      main { width: calc(100% - 24px); }
+    }
+    header {
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+    a {
+      color: #0f62fe;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    code {
+      color: var(--code);
+      font: 12px Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+    th {
+      background: var(--head);
+      font-weight: 700;
+    }
+    .archive-table {
+      min-width: 1180px;
+      table-layout: fixed;
+    }
+    .archive-table th:nth-child(1) { width: 26%; }
+    .archive-table th:nth-child(2) { width: 20%; }
+    .archive-table th:nth-child(3) { width: 31%; }
+    .archive-table th:nth-child(4) { width: 11%; }
+    .archive-table th:nth-child(5) { width: 12%; }
+    .steps td:first-child,
+    .stack td:first-child {
+      width: 160px;
+      font-weight: 700;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      color: #7a3b00;
+      background: #fff3df;
+      border: 1px solid #fed7aa;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .screens {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    figure {
+      margin: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+    figcaption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #2f2f2f;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>TensorBoard Archive Dashboard</h1>
+      <p>Archive root: <code>.\samples\demo</code></p>
+      <p>Last updated: 2026-06-15</p>
+    </header>
+
+    <section>
+      <h2>Table One</h2>
+      <div class="panel table-wrap">
+        <table class="archive-table">
+          <thead>
+            <tr>
+              <th>Folder name</th>
+              <th>Training note</th>
+              <th>Command to run</th>
+              <th>Dashboard URL</th>
+              <th>Double-click launcher</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>archive</td>
+              <td>SolarPanel_Finetuned_v01_1000Labels_ucheck Run2 - Stop when model stops improving - CONTINUE_TRAINING.</td>
+              <td><code>powershell -NoProfile -ExecutionPolicy Bypass -File ".\samples\demo\archive\start.ps1"</code></td>
+              <td><a href="http://localhost:6015/?darkMode=true#timeseries">http://localhost:6015/?darkMode=true#timeseries</a></td>
+              <td><code>.\samples\demo\open-demo.bat</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>How Each Archive Is Created</h2>
+      <div class="panel table-wrap">
+        <table class="steps">
+          <tbody>
+            <tr>
+              <td>1. Source</td>
+              <td>The tool asks for the temporary TensorBoard URL created by ArcGIS Pro while training with TensorBoard enabled.</td>
+            </tr>
+            <tr>
+              <td>2. Discovery</td>
+              <td>It reads TensorBoard API endpoints such as <code>/data/environment</code>, <code>/data/runs</code>, and <code>/data/plugins_listing</code>.</td>
+            </tr>
+            <tr>
+              <td>3. Copy</td>
+              <td>It copies the TensorBoard <code>training_log</code> event files reported by the live site.</td>
+            </tr>
+            <tr>
+              <td>4. Relaunch</td>
+              <td>It creates PowerShell and batch launchers that run TensorBoard from the copied event files on a local port.</td>
+            </tr>
+            <tr>
+              <td>5. Verification</td>
+              <td>It compares source and copied dashboard behavior, including runs and enabled plugins/tabs.</td>
+            </tr>
+            <tr>
+              <td>6. Documentation</td>
+              <td>It writes the manifest, verification report, ZIP backup, SHA-256 checksum, and this dashboard index.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tech Stack In Backend</h2>
+      <div class="panel table-wrap">
+        <table class="stack">
+          <tbody>
+            <tr>
+              <td>ArcGIS Pro</td>
+              <td>Creates the original temporary TensorBoard site from the Image Analyst deep learning training workflow.</td>
+            </tr>
+            <tr>
+              <td>TensorBoard 2.20.0</td>
+              <td>Serves the copied event files as the same interactive dashboard experience.</td>
+            </tr>
+            <tr>
+              <td>PowerShell</td>
+              <td>Copies archives, creates launchers, verifies files, manages ports, and refreshes documentation.</td>
+            </tr>
+            <tr>
+              <td>Event files</td>
+              <td>TensorBoard <code>events.out.tfevents*</code> files provide the runs, charts, images, distributions, and histograms.</td>
+            </tr>
+            <tr>
+              <td>Windows junction</td>
+              <td>Launchers serve logs through a short temporary path so long archive paths do not hide TensorBoard tabs.</td>
+            </tr>
+            <tr>
+              <td>Localhost port</td>
+              <td>The copied dashboard runs locally, for example <code>http://localhost:6015/?darkMode=true#timeseries</code>.</td>
+            </tr>
+            <tr>
+              <td>ZIP + SHA-256</td>
+              <td>Each archive can be backed up and checked later using a generated ZIP file and checksum.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Screenshots Of Each Tab Of The Output</h2>
+      <p>Captured from the real sample TensorBoard archive running from copied event files. <span class="badge">31 runs verified</span></p>
+      <div class="screens">
+        <figure>
+          <figcaption><span>Time Series</span><code>#timeseries</code></figcaption>
+          <img src="screenshots/timeseries.png" alt="TensorBoard Time Series tab screenshot">
+        </figure>
+        <figure>
+          <figcaption><span>Scalars</span><code>#scalars</code></figcaption>
+          <img src="screenshots/scalars.png" alt="TensorBoard Scalars tab screenshot">
+        </figure>
+        <figure>
+          <figcaption><span>Images</span><code>#images</code></figcaption>
+          <img src="screenshots/images.png" alt="TensorBoard Images tab screenshot">
+        </figure>
+        <figure>
+          <figcaption><span>Distributions</span><code>#distributions</code></figcaption>
+          <img src="screenshots/distributions.png" alt="TensorBoard Distributions tab screenshot">
+        </figure>
+        <figure>
+          <figcaption><span>Histograms</span><code>#histograms</code></figcaption>
+          <img src="screenshots/histograms.png" alt="TensorBoard Histograms tab screenshot">
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

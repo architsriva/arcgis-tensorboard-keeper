@@ -1,0 +1,22 @@
+{
+  "verification_status": "Passed",
+  "verified_at": "2026-06-15",
+  "verification_method": "Launched the repo-local copied TensorBoard archive on a temporary local port and queried TensorBoard APIs.",
+  "tested_port": 6135,
+  "default_url": "http://localhost:6015/?darkMode=true#timeseries",
+  "runs": 31,
+  "enabled_plugins": [
+    "timeseries",
+    "scalars",
+    "images",
+    "distributions",
+    "histograms"
+  ],
+  "tabs_verified": [
+    "Time Series",
+    "Scalars",
+    "Images",
+    "Distributions",
+    "Histograms"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-06-11T15:35:00-07:00",
+  "purpose": "Interactive TensorBoard demo archive",
+  "training_note": "SolarPanel_Finetuned_v01_1000Labels_ucheck Run2 - Stop when model stops improving - CONTINUE_TRAINING.",
+  "source_url": "Local runnable sample copied from a temporary ArcGIS Pro TensorBoard URL",
+  "saved_logdir": "training_log",
+  "file_count": 31,
+  "byte_count": 26651300,
+  "tensorboard_exe": "ArcGIS Pro tensorboard.exe, tensorboard.exe, or tensorboard on PATH",
+  "tensorboard_version": "2.20.0",
+  "default_port": 6015,
+  "default_url": "http://localhost:6015/?darkMode=true#timeseries",
+  "copy_method": "Relaunches TensorBoard from the copied event files in this folder.",
+  "short_junction_name": "tb_demo_6015"
+}
