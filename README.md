@@ -63,7 +63,7 @@ http://localhost:6015/?darkMode=true#timeseries
 
 The sample index is here:
 
-[samples/demo/dashboard.html](samples/demo/dashboard.html)
+[samples/demo/dashboard.html]([samples/demo/dashboard.html](https://architsriva.github.io/arcgis-tensorboard-keeper/samples/demo/dashboard.html))
 
 ## Requirements
 
